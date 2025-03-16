@@ -34,7 +34,7 @@ jobs:
       - name: Installing dependencies
         run: |
             echo -e "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
-            pacman -Syu --noconfirm wine git bash yasm python python-pip scons gcc diffutils make wget unzip tar mingw-w64
+            pacman -Syu --noconfirm git bash yasm scons gcc diffutils make wget unzip tar mingw-w64
       
       - name: Checkout
         uses: actions/checkout@v4
@@ -50,9 +50,6 @@ jobs:
 
       - name: Create staging directory
         run: mkdir -v -p build/web
-
-      - name: Builde
-        run: godot -v --export "HTML5" ../build/web/index.html project/project.godot
 
       - name: Build
         run: |
