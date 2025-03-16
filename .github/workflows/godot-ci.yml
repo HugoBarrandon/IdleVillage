@@ -10,7 +10,9 @@
 name: 'Publish to GitHub Pages'
 
 env:
-  GODOT_VERSION: 4.2.2 # Remember to manually set image to this version below.
+  GODOT_VERSION: 4.4.4
+  GODOT_PROJECT_LOCATION: src/project.godot
+  EXPORT_FOLDER: bin/web
 
 on:
   workflow_dispatch:
@@ -20,31 +22,42 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     container:
-      image: barichello/godot-ci:4.2.2
+      image: archlinux:latest
 
     steps:
+      - name : Setting extra variables
+        run: |
+          echo "MAIN_FOLDER=$(pwd)" >> $GITHUB_ENV
+      
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Move HTML5 templates into position
+      
+      - name: Prepare Godot
         run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          wget -q -O godot_linux.zip https://github.com/godotengine/godot-builds/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip
+          unzip godot_linux.zip
+          wget -q -O godot_export_templates.tpz https://github.com/godotengine/godot-builds/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
+          unzip godot_export_templates.tpz -d ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
+          mv ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable/templates/* ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable/
+
       - name: Create staging directory
         run: mkdir -v -p build/web
 
-      - name: Build
+      - name: Builde
         run: godot -v --export "HTML5" ../build/web/index.html project/project.godot
 
+      - name: Build
+        run: |
+          mkdir -p ${{ env.EXPORT_FOLDER_WINDOWS }}
+          ./Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64 --import ${{ env.GODOT_PROJECT_LOCATION }} --quiet --headless --export-release Web ${{ env.EXPORT_FOLDER }}/index.html
+      
+
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
-          force_orphan: true
-          user_name: 'github-ci[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: 'Publish to gh-pages'
