@@ -52,8 +52,7 @@ jobs:
         run: mkdir -v -p build/web
 
       - name: Build
-        run: |
-          mkdir -p ${{ env.EXPORT_FOLDER_WINDOWS }}
+        run:
           ./Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64 --import ${{ env.GODOT_PROJECT_LOCATION }} --quiet --headless --export-release Web ${{ env.EXPORT_FOLDER }}/index.html
       
 
