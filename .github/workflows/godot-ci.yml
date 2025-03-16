@@ -1,61 +1,24 @@
-# Workflow to publish Godot HTML5 games to GitHub Pages
-#
-# This script assumes that the project itself is in a subdirectory "project". This 
-# folder structure frees up the root of the repository to be used for non-project
-# files, such as the README, build folder, or raw assets folder.
-#
-# Make sure your project is configured for Web export
-# to the path `build/web`.
-
-name: 'Publish to GitHub Pages'
-
-env:
-  GODOT_VERSION: 4.4
-  GODOT_PROJECT_LOCATION: src/project.godot
-  EXPORT_FOLDER: bin/web
-
+name: 'Build Godot Project'
+ 
 on:
   workflow_dispatch:
   push:
     branches:
       - main
-
 jobs:
-  deploy:
+  Godot:
     runs-on: ubuntu-latest
-
-    container:
-      image: archlinux:latest
-
+    strategy:
+      matrix:
+        platform: [linux, windows, mac]
     steps:
-      - name : Setting extra variables
-        run: |
-          echo "MAIN_FOLDER=$(pwd)" >> $GITHUB_ENV
-      - name: Installing dependencies
-        run: |
-            echo -e "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
-            pacman -Syu --noconfirm git bash yasm scons gcc diffutils make wget unzip tar mingw-w64
-      
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Prepare Godot
-        run: |
-          wget -q -O godot_linux.zip https://github.com/godotengine/godot-builds/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip
-          unzip godot_linux.zip
-          wget -q -O godot_export_templates.tpz https://github.com/godotengine/godot-builds/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
-          mkdir -p ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
-          unzip godot_export_templates.tpz -d ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
-          mv ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable/templates/* ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable/
-
-      - name: Build
-        run: |
-          mkdir -p ${{ env.EXPORT_FOLDER }}
-          ./Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64 --import ${{ env.GODOT_PROJECT_LOCATION }} --quiet --headless --export-release Web ${{ env.EXPORT_FOLDER }}/index.html
-      
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+      - uses: actions/checkout@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
+          lfs: true
+      - name: Build
+        id: build
+        uses: manleydev/build-godot-action@v1.4.1
+        with:
+          name: example
+          preset: Web
+          debugMode: "false"
