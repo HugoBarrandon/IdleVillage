@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c5lovprxdgyrq"]
+
+[ext_resource type="FontFile" uid="uid://jrmxmiiqt0ne" path="res://Assets/Fonts/rainyhearts.ttf" id="1_8srqr"]
+
+[resource]
+default_font = ExtResource("1_8srqr")

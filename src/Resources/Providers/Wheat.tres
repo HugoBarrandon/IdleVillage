@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProviderResource" load_steps=4 format=3 uid="uid://bbhbn0ugsf4u"]
+
+[ext_resource type="Resource" uid="uid://by7pugp02dkuv" path="res://Resources/Item/Wheat.tres" id="1_4aeom"]
+[ext_resource type="Script" uid="uid://dyi3ck0hwv15d" path="res://Scripts/CustomResources/ProviderResource.gd" id="1_h413k"]
+[ext_resource type="Texture2D" uid="uid://bil0p7g4g10k2" path="res://Assets/World/Wheat.png" id="3_ll3vc"]
+
+[resource]
+script = ExtResource("1_h413k")
+loot = ExtResource("1_4aeom")
+sprite = ExtResource("3_ll3vc")
+metadata/_custom_type_script = "uid://dyi3ck0hwv15d"

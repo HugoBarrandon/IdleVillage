@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://dccq7kb6xglsm"]
+
+[ext_resource type="Script" uid="uid://ccbnmeqsri0gs" path="res://Scripts/Ui/Parts/CustomPanel.gd" id="1_iqind"]
+[ext_resource type="Texture2D" uid="uid://30jhbcdeeqan" path="res://Assets/GUI/Panels/Window.png" id="2_eh8tp"]
+[ext_resource type="Texture2D" uid="uid://ch2lh314oxl5r" path="res://Assets/GUI/Panels/WindowStroke.png" id="3_rv2xs"]
+[ext_resource type="Texture2D" uid="uid://py2xdw0faq7" path="res://Assets/GUI/Panels/CornersGold.png" id="4_pkkjy"]
+
+[node name="CustomPanel" type="Control"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -912.0
+offset_bottom = -492.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iqind")
+
+[node name="Background" type="NinePatchRect" parent="."]
+self_modulate = Color(0.12549, 0.172549, 0.239216, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_eh8tp")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Border" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_rv2xs")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Corner" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_pkkjy")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16

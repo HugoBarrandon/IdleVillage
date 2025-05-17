@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7yvogsvx1gv6"]
+
+[ext_resource type="Script" uid="uid://b6ru48wwvb3he" path="res://Scripts/Ui/Science/ScienceTree.gd" id="1_c1n0y"]
+[ext_resource type="Texture2D" uid="uid://30jhbcdeeqan" path="res://Assets/GUI/Panels/Window.png" id="2_2c8x0"]
+[ext_resource type="Resource" uid="uid://cj8l4sy2jj7fq" path="res://Resources/Sciences/House.tres" id="3_7kvie"]
+[ext_resource type="PackedScene" uid="uid://bybn84wnnrply" path="res://Scenes/UI/Science/ScienceButton.tscn" id="7_3gimo"]
+
+[node name="ScienceTree" type="Control" node_paths=PackedStringArray("skills")]
+custom_minimum_size = Vector2(720, 405)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 720.0
+offset_bottom = 405.0
+script = ExtResource("1_c1n0y")
+skills = NodePath("Skills")
+
+[node name="Background" type="NinePatchRect" parent="."]
+self_modulate = Color(0.12549, 0.172549, 0.239216, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2c8x0")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Skills" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScienceButton" parent="Skills" instance=ExtResource("7_3gimo")]
+offset_left = 328.0
+offset_top = 136.0
+offset_right = 328.0
+offset_bottom = 136.0
+science = ExtResource("3_7kvie")

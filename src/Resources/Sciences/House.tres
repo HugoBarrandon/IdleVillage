@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ScienceResource" load_steps=5 format=3 uid="uid://cj8l4sy2jj7fq"]
+
+[ext_resource type="Script" uid="uid://bmbtl6rgt6jkr" path="res://Scripts/CustomResources/BuildingResource.gd" id="1_jbv71"]
+[ext_resource type="Script" uid="uid://ypnbit4h8dvx" path="res://Scripts/CustomResources/ScienceResource.gd" id="2_0a0ae"]
+[ext_resource type="Texture2D" uid="uid://c44fgldmhyyq8" path="res://Assets/Icons/Npc_Icon.png" id="2_kx5ea"]
+[ext_resource type="Resource" uid="uid://cppogjdbucml8" path="res://Resources/Building/House.tres" id="3_0a0ae"]
+
+[resource]
+script = ExtResource("2_0a0ae")
+name = "House"
+icon = ExtResource("2_kx5ea")
+cost = 1
+condition = Dictionary[ExtResource("1_jbv71"), int]({})
+unlocked_buildings = Array[ExtResource("1_jbv71")]([ExtResource("3_0a0ae")])
+metadata/_custom_type_script = "uid://ypnbit4h8dvx"

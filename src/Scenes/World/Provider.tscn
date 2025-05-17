@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbyhd4ykut1a7"]
+
+[ext_resource type="Script" uid="uid://dqvofo3eh4qs7" path="res://Scripts/World/Provider.gd" id="1_ffuy3"]
+
+[node name="Provider" type="StaticBody2D" node_paths=PackedStringArray("sprite", "collider") groups=["Resources"]]
+collision_layer = 3
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_ffuy3")
+sprite = NodePath("Sprite2D")
+collider = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 16)
+collision_mask = 10
+collide_with_areas = true
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

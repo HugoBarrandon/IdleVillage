@@ -1,13 +1,20 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dmqgb32s8ulcp"]
 
-[ext_resource type="Texture2D" uid="uid://ccltcqjw7a7wp" path="res://Assets/Textures/Green-Belt.png" id="1_l25wv"]
+[ext_resource type="Texture2D" uid="uid://ccltcqjw7a7wp" path="res://Assets/Building/Belts/Green-Belt.png" id="1_l25wv"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ypjbc"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l25wv"]
 texture = ExtResource("1_l25wv")
+0:0/animation_columns = 4
+0:0/animation_frame_0/duration = 0.1
+0:0/animation_frame_1/duration = 0.1
+0:0/animation_frame_2/duration = 0.1
+0:0/animation_frame_3/duration = 0.1
 0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [resource]
-sources/0 = SubResource("TileSetAtlasSource_ypjbc")
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 8
+custom_data_layer_0/name = "Type"
+custom_data_layer_0/type = 2
+sources/0 = SubResource("TileSetAtlasSource_l25wv")

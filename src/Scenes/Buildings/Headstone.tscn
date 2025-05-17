@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv5uj1he62k83"]
+
+[ext_resource type="Script" uid="uid://befmsb5if80ur" path="res://Scripts/Building/Headstone.gd" id="1_5j18y"]
+[ext_resource type="Texture2D" uid="uid://bti5qce4f77nd" path="res://Assets/Building/HeadStone.png" id="2_twx8c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jm5g5"]
+size = Vector2(64, 48)
+
+[node name="Headstone" type="Node2D"]
+script = ExtResource("1_5j18y")
+
+[node name="HeadStone" type="StaticBody2D" parent="." groups=["Buildings"]]
+collision_layer = 11
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadStone"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_jm5g5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_twx8c")

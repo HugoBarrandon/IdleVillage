@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cib6rnu7127re"]
+
+[ext_resource type="Script" uid="uid://bt3sx8le41s3d" path="res://Scripts/Ui/ResourceRequirementUi.gd" id="1_5y5g0"]
+
+[node name="ResourceRequirement" type="HBoxContainer" node_paths=PackedStringArray("icon", "number")]
+custom_minimum_size = Vector2(32, 16)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -908.0
+offset_bottom = -524.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_5y5g0")
+icon = NodePath("Icon")
+number = NodePath("Number")
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Number" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 11
+text = "0/10"

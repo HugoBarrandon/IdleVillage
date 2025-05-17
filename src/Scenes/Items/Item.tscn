@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://t5f8wc7jflmp"]
+
+[ext_resource type="Script" uid="uid://75sjfan1wl4j" path="res://Scripts/Item.gd" id="1_mqxk5"]
+[ext_resource type="Texture2D" uid="uid://75fdrf8sgplq" path="res://Assets/Items/Wood.png" id="2_82o1l"]
+[ext_resource type="Theme" uid="uid://c5lovprxdgyrq" path="res://Resources/Main.tres" id="3_82o1l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_560uv"]
+size = Vector2(14, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_560uv"]
+radius = 2.0
+
+[node name="Item" type="StaticBody2D" node_paths=PackedStringArray("icon")]
+texture_filter = 1
+input_pickable = true
+script = ExtResource("1_mqxk5")
+icon = NodePath("Sprite2D")
+speed = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_560uv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_82o1l")
+
+[node name="Collider" type="Area2D" parent="."]
+collision_layer = 10
+collision_mask = 10
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
+shape = SubResource("CircleShape2D_560uv")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+
+[node name="Number" type="RichTextLabel" parent="Control"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 7.0
+grow_horizontal = 0
+mouse_filter = 2
+theme = ExtResource("3_82o1l")
+theme_override_font_sizes/normal_font_size = 16
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="area_entered" from="Collider" to="." method="_on_collider_entered"]
+[connection signal="area_exited" from="Collider" to="." method="_on_collider_exited"]
+[connection signal="body_entered" from="Collider" to="." method="_on_collider_entered"]
+[connection signal="body_exited" from="Collider" to="." method="_on_collider_exited"]
